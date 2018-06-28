@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "parser.cpp"
+#include "src/equation_parser/parser.cpp"
 
 void output_terms(std::string title, vector<Term> terms) {
   std::cout << title;

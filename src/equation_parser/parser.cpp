@@ -7,6 +7,7 @@
 #include <string>
 #include "utility.cpp"
 #include "term.cpp"
+#include "equation.cpp"
 
 using namespace std;
 
