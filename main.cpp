@@ -8,13 +8,16 @@ void output_terms(std::string title, vector<Term> terms) {
   std::cout << "\n";
   for(int i = 0; i < terms.size(); i = i + 1) {
     std::cout << terms[i].get_raw_term();
-    if(terms[i].get_type() == Term_Type::Trigometric) {
+    Term_Type current_term_type = terms[i].get_type('x');
+    if(current_term_type == Term_Type::Trigometric) {
       std::cout << " (Trig)";
-    } else if(terms[i].get_type() == Term_Type::Linear) {
-      std::cout << " (Linear)";
-    } else if(terms[i].get_type() == Term_Type::Exponential) {
+    } else if(current_term_type == Term_Type::Linear) {
+      std::cout << " (Linear) \n";
+      std::cout << terms[i].differentiate('x');
+      std::cout << " (Derivative)";
+    } else if(current_term_type == Term_Type::Exponential) {
       std::cout << " (Exponential)";
-    } else if(terms[i].get_type() == Term_Type::Polynomial) {
+    } else if(current_term_type == Term_Type::Polynomial) {
       std::cout << " (Polynomial)";
     }
     std::cout << '\n';
