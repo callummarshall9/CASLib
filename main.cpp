@@ -27,7 +27,7 @@ std::string get_equation() {
   std::cin.getline(equation_input, sizeof(equation_input));
   std::string equation_string = std::string(equation_input);
   if(equation_string == "Default") {
-    return "5/(x+3)+3+x^2+3/2x^2=0";
+    return "5/(x+3)+3+x^2+3/(2*x^2)=0";
   } else {
     return equation_string;
   }

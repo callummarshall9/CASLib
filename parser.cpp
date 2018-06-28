@@ -20,11 +20,11 @@ public:
     return raw_term;
   }
 
-  string differentiate() {
+  string differentiate(char respect_to) {
     Term_Type term_type = get_type();
     string raw_format = get_raw_term();
     if(term_type == Term_Type::Linear) {
-      return replace(raw_format.begin(),raw_format.end(),"x","(1)");
+      return raw_format.replace(raw_format.begin(), raw_format.end(), respect_to, '1');
     } else if(term_type == Term_Type::Polynomial) {
       return raw_format;
     }
