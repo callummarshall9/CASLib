@@ -7,33 +7,11 @@
 #include <vector>
 #include <sstream>
 #include <iostream>
+#include "utilities.cpp"
 
 using namespace std;
 char operators[7] = {'+', '-', '*', '/', '^', '(', ')'};
 std::map<char,int> precedence = {{'^',4},{'*',3},{'/',3},{'+',2},{'-',2}};
-
-string convert_from_char_to_string(char c) {
-  stringstream ss;
-  ss << c;
-  string output;
-  ss >> output;
-  return output;
-}
-
-vector<string> split(string source, char token) {
-  vector<string> strings;
-  string buffer = "";
-  for(int i = 0; i < source.size();i++) {
-    if(source[i] == token) {
-      strings.push_back(buffer);
-    } else {
-      buffer = buffer + source.at(i);
-    }
-  }
-  if(buffer != "") {
-    strings.push_back(buffer);
-  } return strings;
-}
 
 bool is_operator(char infix_token) {
   for(int j = 0; j < sizeof(operators)/sizeof(operators[0]);j++) {
@@ -83,15 +61,6 @@ string reverse_polish(string infix_source) {
   if(buffer != "") {
     output_queue.push(buffer);
   }
-  /*for(int i = 0; i < infix.size(); i++) {
-    if(is_operator(infix[i])) {
-      output_queue.push(buffer);
-      buffer = "";
-      operator_stack.push(infix.at(i));
-    } else {
-      buffer = buffer + infix.at(i);
-    }
-  }*/
   string output_reverse_polish = "";
   while(!output_queue.empty()) {
     output_reverse_polish = output_reverse_polish + " " + output_queue.front();
