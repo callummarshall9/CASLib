@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum class Term_Type { Trigometric, Exponential, Polynomial, Linear };
+enum class Term_Type { Trigometric, Exponential, Polynomial, Linear, Inverse };
 
 class Term {
 public:
@@ -21,7 +21,7 @@ public:
     size_t start_pos = 0;
     while((start_pos = str.find(from, start_pos)) != std::string::npos) {
       str.replace(start_pos, from.length(), to);
-      start_pos += to.length(); // ...
+      start_pos += to.length();
     } return str;
   }
 
@@ -41,9 +41,17 @@ public:
   }
 
   Term_Type get_type(char respect_to) {
-    if(get_raw_term().find("sin") != -1 || get_raw_term().find("cos") != -1) {
+    string raw_term = get_raw_term();
+    if(raw_term.find("/") != -1) {
+      int position = raw_term.find("/");
+      for(int i = 0; i < position; i = i + 1) {
+        if(raw_term.at(i) == respect_to) {
+          return Term_Type::Linear;
+        }
+      } return Term_Type::Inverse;
+    } else if(raw_term.find("sin") != -1 || raw_term.find("cos") != -1) {
       return Term_Type::Trigometric;
-    } else if(get_raw_term().find("exp") != -1) {
+    } else if(raw_term.find("exp") != -1) {
       return Term_Type::Exponential;
     } else if(get_raw_term().find(convert_from_char_to_string(respect_to) + "^") != -1) {
       return Term_Type::Polynomial;
