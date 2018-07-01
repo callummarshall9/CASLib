@@ -59,7 +59,7 @@ string evaluate_symbol(vector<string> tokens) {
       } else if(tokens.at(i) == "*") {
         if(operand_one == operand_two) {
           result_symbolic = operand_one + "^2";
-        } else {
+        } else {//Flipping coefficients in product of x. So x*3 becomes 3*x
           if(is_numeric_expression(operand_one)) {
             result_symbolic = operand_one + "*" + operand_two;
           } else {
