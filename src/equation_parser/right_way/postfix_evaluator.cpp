@@ -48,7 +48,19 @@ string evaluate_symbol(vector<string> tokens) {
         if(operand_one == operand_two) {
           result_symbolic = "2*" + operand_one;
         } else {
-          result_symbolic = "(" + operand_one + "+" + operand_two + ")";
+          if(operand_one.find("*") != -1 && operand_two.find("*") != -1) {
+            vector<string> first_operand_parts = split(operand_one, '*');
+            vector<string> second_operand_parts = split(operand_two, '*');
+            if(first_operand_parts.at(1) == second_operand_parts.at(1) &&
+             is_numeric_expression(first_operand_parts.at(0)) &&
+             is_numeric_expression(second_operand_parts.at(0))) {
+              result_symbolic = "(" + to_string(stoi(first_operand_parts.at(0)) + stoi(second_operand_parts.at(0))) + "*" + first_operand_parts.at(1) + ")";
+            } else {
+              result_symbolic = "(" + operand_one + "+" + operand_two + ")";
+            }
+          } else {
+            result_symbolic = "(" + operand_one + "+" + operand_two + ")";
+          }
         }
       } else if(tokens.at(i) == "-") {
         if(operand_one == operand_two) {
