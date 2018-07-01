@@ -10,7 +10,6 @@ int main(int argc, char** argv) {
   string postfix_expression = reverse_polish(expression);
   std::cout << reverse_polish(expression);
   std::cout << '\n';
-  int result = evaluate(postfix_expression);
-  std::cout << result;
+  std::cout << evaluate(postfix_expression);
   std::cout << '\n';
 }
